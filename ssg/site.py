@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 
 
 class Site:
@@ -29,4 +30,9 @@ class Site:
         if parser is not None:
             parser.parse(path, self.source, self.dest)
         else:
-            print("Not Implemented")
+            self.error(f"No parser for the {path.suffix} extension, file skipped!")
+
+    @staticmethod
+    def error(message):
+        sys.stderr.write(f"\x1b[1;31m{message}\n")
+
